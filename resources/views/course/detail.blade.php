@@ -1,17 +1,54 @@
-<!DOCTYPE html>
-<html>
-<head><title>Course Details</title></head>
-<body>
-    <h1>Course Details</h1>
-    <p><strong>ID:</strong> {{ $course->id }}</p>
-    <p><strong>Name:</strong> {{ $course->name }}</p>
-    <p><strong>Description:</strong> {{ $course->description }}</p>
-    <p><strong>Duration (weeks):</strong> {{ $course->duration }}</p>
-    <p><strong>Fee:</strong> {{ $course->fee }}</p>
-    <p><strong>Difficulty:</strong> {{ $course->difficulty }}</p>
-    <p><strong>Active:</strong> {{ $course->is_active ? 'Yes' : 'No' }}</p>
 
-    <a href="/courses/{{ $course->id }}/edit">Edit Course</a><br>
-    <a href="/courses">Back to Courses</a>
-</body>
-</html>
+@extends('layouts.app')
+
+@section('content')
+
+<h1>Course Details</h1>
+
+<label>Name:</label>
+<input
+    type="text"
+    value="{{ $course->name }}"
+    readonly
+>
+
+<label>Description:</label>
+<textarea rows="3" readonly>{{ $course->description }}</textarea>
+
+<label>Duration (weeks):</label>
+<input
+    type="text"
+    value="{{ $course->duration }}"
+    readonly
+>
+
+<label>Fee:</label>
+<input
+    type="text"
+    value="{{ $course->fee }}"
+    readonly
+>
+
+<label>Difficulty:</label>
+<input
+    type="text"
+    value="{{ $course->difficulty }}"
+    readonly
+>
+
+<label>
+    <input
+        type="checkbox"
+        disabled
+        {{ $course->is_active ? 'checked' : '' }}
+    >
+    Active Course
+</label>
+
+<br><br>
+
+<a href="{{ route('courses.edit', $course->id) }}">Edit Course</a>
+
+<a href="{{ route('courses.index') }}">Back to Courses</a>
+
+@endsection
